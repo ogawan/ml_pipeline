@@ -1,9 +1,12 @@
+import sys
+sys.path.insert(0, "work/ml_pipeline/regression_model/regression_model")
+
 import numpy as np
 from sklearn.model_selection import train_test_split
-from regression_model import pipeline
-from regression_model.processing.data_management import load_dataset, save_pipeline
-from regression_model.config import config
-from regression_model import __version__ as _version
+from regression_models import pipeline
+from regression_models.processing.data_management import load_dataset, save_pipeline
+from regression_models.config import config
+from regression_models import __version__ as _version
 
 import logging
 

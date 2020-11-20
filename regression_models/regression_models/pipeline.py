@@ -2,14 +2,13 @@ from sklearn.linear_model import Lasso
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
 
-from regression_model.processing import preprocessors as pp
+from regression_models.processing import preprocessors as pp
 
 import logging
 
-
 _logger = logging.getLogger(__name__)
 
-price_pipe = Pipeline(
+chem_pipe = Pipeline(
     [
         (
             "SmilestoDescriptors",

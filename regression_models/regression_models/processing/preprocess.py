@@ -9,7 +9,7 @@ from rdkit.Chem import Descriptors
 from rdkit.ML.Descriptors import MoleculeDescriptors
 from sklearn.base import BaseEstimator, TransformerMixin
 from patsy import dmatrices
-from regression_model.processing.errors import InvalidModelInputError
+from regression_models.processing.errors import InvalidModelInputError
 import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor    
 
