@@ -1,8 +1,10 @@
+import sys
+sys.path.insert(0, "/work/ml_pipeline/regression_models/")
+
 import pandas as pd
 import joblib
 from sklearn.pipeline import Pipeline
-
-from regression_models.config import config
+from config import config
 from regression_models import __version__ as _version
 
 import logging
@@ -12,7 +14,6 @@ _logger = logging.getLogger(__name__)
 def load_dataset(*, file_name: str) -> pd.DataFrame:
     _data = pd.read_csv(f"{config.DATASET_DIR}/{file_name}")
     return _data
-
 
 def save_pipeline(*, pipeline_to_persist) -> None:
     """Persist the pipeline.

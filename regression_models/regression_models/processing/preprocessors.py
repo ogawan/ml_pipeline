@@ -9,7 +9,6 @@ from rdkit.Chem import Descriptors
 from rdkit.ML.Descriptors import MoleculeDescriptors
 from sklearn.base import BaseEstimator, TransformerMixin
 from patsy import dmatrices
-from regression_models.processing.errors import InvalidModelInputError
 import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor    
 
@@ -20,8 +19,10 @@ class SmilestoDescriptors(BaseEstimator, TransformerMixin):
         
         #Choose rdkit or ecfp4
         if mode == "rdkit":
+            print("Generating rdkit descriptors...")
             self.mode = True
         else:
+            print("Generating ecfp4 descriptors...")
             self.mode = False
 
     def fit(self, X: pd.DataFrame, y: pd.Series = None) -> "SmilestoDescriptors":
@@ -82,7 +83,7 @@ class DropChollinearityVif(BaseEstimator, TransformerMixin):
     def fit(self, X: pd.DataFrame, y: pd.Series = None) -> "DropChollinearityVif":
         """Fit statement to accomodate the sklearn pipeline"""
         return self
-5
+    
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
         """Apply the transforms to the dataframe: Smiles"""
         variables = list(range(X.shape[1]))

@@ -1,11 +1,11 @@
 import sys
-sys.path.insert(0, "work/ml_pipeline/regression_model/regression_model")
-
+sys.path.insert(0, "/work/ml_pipeline/regression_models/")
+import regression_models
 import numpy as np
 from sklearn.model_selection import train_test_split
-from regression_models import pipeline
-from regression_models.processing.data_management import load_dataset, save_pipeline
-from regression_models.config import config
+import pipeline
+from processing.data_management import load_dataset, save_pipeline
+from config import config
 from regression_models import __version__ as _version
 
 import logging
@@ -17,14 +17,14 @@ def run_training() -> None:
 
     # read training data
     data = load_dataset(file_name=config.TRAINING_DATA_FILE)
+    print("DATA:")
+    print(data)
 
     # divide train and test
     X_train, X_test, y_train, y_test = train_test_split(
         data[config.FEATURES], data[config.TARGET], test_size=0.1, random_state=0
     )  # we are setting the seed here
-    
-    # transform the target
-    y_train = np.log(y_train)
+    print("Complete Splitting data")
 
     pipeline.chem_pipe.fit(X_train[config.FEATURES], y_train)
 
