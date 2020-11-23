@@ -33,13 +33,14 @@ class SmilestoDescriptors(BaseEstimator, TransformerMixin):
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
         """Apply the transforms to the dataframe: Smiles"""
         
-        if not isinstance(X, list):
+        if len(X) == 1:
             X = [X]
         else:
             X = X
             
         #Convert mol to 
         X = X.copy()
+
         X = [Chem.MolFromSmiles(smile) for smile in X ]   
         
         if self.mode == True:

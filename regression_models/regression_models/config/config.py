@@ -16,11 +16,8 @@ TESTING_DATA_FILE = "test.csv"
 TRAINING_DATA_FILE = "train.csv"
 TARGET = "logS"
 
-
 # variables
-FEATURES = [
-    "SMILES",
-]
+FEATURES = "SMILES"
 
 PIPELINE_NAME = "lasso_regression"
 PIPELINE_SAVE_FILE = f"{PIPELINE_NAME}_output_v"

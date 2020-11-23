@@ -17,16 +17,15 @@ def run_training() -> None:
 
     # read training data
     data = load_dataset(file_name=config.TRAINING_DATA_FILE)
-    print("DATA:")
-    print(data)
 
     # divide train and test
     X_train, X_test, y_train, y_test = train_test_split(
         data[config.FEATURES], data[config.TARGET], test_size=0.1, random_state=0
     )  # we are setting the seed here
+    
     print("Complete Splitting data")
 
-    pipeline.chem_pipe.fit(X_train[config.FEATURES], y_train)
+    pipeline.chem_pipe.fit(X_train, y_train)
 
     _logger.info(f"saving model version: {_version}")
     save_pipeline(pipeline_to_persist=pipeline.chem_pipe)
