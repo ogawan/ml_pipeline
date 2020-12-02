@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0, "/work/ml_pipeline/regression_models/")
 
 import pandas as pd
-import joblib
+import sklearn.externals.joblib as joblib
 from sklearn.pipeline import Pipeline
 from config import config
 from regression_models import __version__ as _version
