@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0, "/work/ml_pipeline/regression_models/")
+from config import config
 import numpy as np
 import pandas as pd
 import rdkit
@@ -86,21 +89,6 @@ class DropChollinearityVif(BaseEstimator, TransformerMixin):
         return self
     
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
-        """Apply the transforms to the dataframe: Smiles"""
-        variables = list(range(X.shape[1]))
-        dropped = True
-        while dropped:
-            dropped = False
-            vif = [variance_inflation_factor(X.iloc[:, variables].values, ix)
-                   for ix in range(X.iloc[:, variables].shape[1])]
+        """Filter out parameters with collinearity"""
 
-            maxloc = vif.index(max(vif))
-            if max(vif) > self.threshold:
-                print('dropping \'' + X.iloc[:, variables].columns[maxloc] +
-                      '\' at index: ' + str(maxloc))
-                del variables[maxloc]
-                dropped = True
-
-        print('Remaining variables:')
-        print(X.columns[variables])
-        return X.iloc[:, variables]
+        return X[config.EXTRACTED_RDKIT_DESCRIPTORS]
