@@ -15,19 +15,21 @@ def load_dataset(*, file_name: str) -> pd.DataFrame:
     _data = pd.read_csv(f"{config.DATASET_DIR}/{file_name}")
     return _data
 
-def save_pipeline(*, pipeline_to_persist) -> None:
+def save_pipeline(*, pipeline_to_persist, model_name) -> None:
     """Persist the pipeline.
     Saves the versioned model, and overwrites any previous
     saved models. This ensures that when the package is
     published, there is only one trained model that can be
     called, and we know exactly how it was built.
     """
-
+    
+    model_name = model_name + "_regression"
+    
     # Prepare versioned save file name
-    save_file_name = f"{config.PIPELINE_SAVE_FILE}{_version}.pkl"
+    save_file_name = f"{model_name}{_version}.pkl"
     save_path = config.TRAINED_MODEL_DIR / save_file_name
 
-    remove_old_pipelines(files_to_keep=save_file_name)
+    #remove_old_pipelines(files_to_keep=save_file_name)
     joblib.dump(pipeline_to_persist, save_path)
     _logger.info(f"saved pipeline: {save_file_name}")
 
@@ -38,7 +40,6 @@ def load_pipeline(*, file_name: str) -> Pipeline:
     file_path = config.TRAINED_MODEL_DIR / file_name
     trained_model = joblib.load(filename=file_path)
     return trained_model
-
 
 def remove_old_pipelines(*, files_to_keep) -> None:
     """

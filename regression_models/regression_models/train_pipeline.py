@@ -25,10 +25,18 @@ def run_training() -> None:
     
     print("Complete Splitting data")
 
-    pipeline.chem_pipe.fit(X_train, y_train)
+    pipeline.lasso_pipe.fit(X_train, y_train)
+    pipeline.rf_pipe.fit(X_train, y_train)
 
     _logger.info(f"saving model version: {_version}")
-    save_pipeline(pipeline_to_persist=pipeline.chem_pipe)
+    
+    #Lasso
+    save_pipeline(pipeline_to_persist=pipeline.lasso_pipe, model_name= "lasso")
+    
+    print(pipeline.lasso_pipe)
+    
+    #random forest
+    save_pipeline(pipeline_to_persist=pipeline.rf_pipe, model_name = "random_forest")
     
 if __name__ == "__main__":
     run_training()
