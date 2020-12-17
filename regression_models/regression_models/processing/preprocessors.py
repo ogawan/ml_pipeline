@@ -40,9 +40,9 @@ class SmilestoDescriptors(BaseEstimator, TransformerMixin):
             X = [X]
         else:
             X = X
-            
+        
+        X = X.copy()    
         #Convert mol to 
-        X = X.copy()
 
         X = [Chem.MolFromSmiles(smile) for smile in X ]   
         
@@ -92,3 +92,4 @@ class DropChollinearityVif(BaseEstimator, TransformerMixin):
         """Filter out parameters with collinearity"""
 
         return X[config.EXTRACTED_RDKIT_DESCRIPTORS]
+    

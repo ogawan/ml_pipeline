@@ -42,3 +42,19 @@ rf_pipe = Pipeline(
         ("rf_model", RandomForestRegressor(n_estimators=100)),
     ]
 )
+
+gbdt_pipe = Pipeline(
+    [
+        (
+            "SmilestoDescriptors",
+            pp.SmilestoDescriptors(mode="rdkit"),
+        ),
+        
+         (
+            "DropChollinearityVif",
+            pp.DropChollinearityVif(threshold=10),
+        ),       
+        
+        ("gbdt_model", pp.GbdtRegressor(n_estimators=100)),
+    ]
+)
